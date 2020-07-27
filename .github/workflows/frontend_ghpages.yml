@@ -1,0 +1,36 @@
+name: Deploy shnotes to GitHub Pages
+
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    env:
+      workdir: ./shnotes_frontend
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+      
+    - name: Use node.js ${{matrix.node-version}}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{matrix.node-version}}
+        
+    - name: Install packages
+      run: npm install
+      working-directory: ${{env.workdir}}
+    
+    - name: Deploy to GitHub Pages
+      working-directory: ${{env.workdir}}
+      run: |
+        git config --global user.email ${{secrets.EMAIL}}
+        git config --global user.name ${{secrets.USERNAME}}
+        git remote set-url origin https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/${{secrets.USERNAME}}/shnotes.git
+        npm run deploy
