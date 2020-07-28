@@ -10,7 +10,7 @@ jobs:
   build:
     env:
       workdir: ./shnotes_backend
-      jardir: ./shnotes_backend/build/libs/sharednotes.jar
+      jardir: ./shnotes_backend/build/libs/*
     runs-on: ubuntu-latest
 
     steps:
@@ -24,10 +24,6 @@ jobs:
     - name: Build with Gradle
       working-directory: ${{env.workdir}}
       run: gradle bootJar
-    
-    - name: test
-      working-directory: ${{env.workdir}}
-      run: ls
       
     - name: Copy jar to server
       uses: appleboy/scp-action@master
