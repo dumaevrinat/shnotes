@@ -1,7 +1,3 @@
-create database shared_notes;
-
-use shared_notes;
-
 create table notebooks
 (
     string_id varchar(255) not null,
