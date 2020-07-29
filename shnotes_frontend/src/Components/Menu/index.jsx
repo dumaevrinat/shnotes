@@ -84,7 +84,7 @@ export default function Menu({isOpenMenu, notebookUrl}) {
             </List>
             <List className={classes.list} subheader={<ListSubheader>Настройки текущего блокнота</ListSubheader>}>
                 <Hidden smUp>
-                    <ListItem button onClick={() => copy('dumaevrinat.github.io/#/' + notebookUrl)}>
+                    <ListItem button onClick={() => copy('dumaevrinat.github.io/#' + notebookUrl)}>
                         <ListItemIcon className={classes.itemIconTag}><ShareOutlined/></ListItemIcon>
                         <ListItemText primary="Скопировать ссылку"/>
                     </ListItem>
