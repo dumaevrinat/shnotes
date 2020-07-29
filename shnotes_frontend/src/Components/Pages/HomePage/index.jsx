@@ -9,7 +9,7 @@ import CreateNotebookDialog from "../../DialogCreateNotebook"
 import Context from "../../../context"
 
 import Lottie from 'react-lottie'
-import animationData from '../../../lotties/welcome.json'
+import animationData from '../../../lotties/multitasking.json'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -66,11 +66,12 @@ export default function HomePage() {
                             </Button>
                         </div>
                     </Grow>
+
+                    <div className={classes.animation}>
+                        <Lottie options={defaultOptions}/>
+                    </div>
                 </Context.Provider>
             </Container>
-            <div className={classes.animation}>
-                <Lottie options={defaultOptions} height={550} width={550}/>
-            </div>
         </div>
     )
 }
