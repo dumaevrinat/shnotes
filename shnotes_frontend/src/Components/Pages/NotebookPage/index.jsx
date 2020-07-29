@@ -98,11 +98,10 @@ export default function NotebookPage(props) {
 
     useEffect(() => {
         if (hasError && error.type === GET_NOTEBOOK && error.code === 400) {
-            setHasError(false)
-
+            dispatch(setHasError(false))
             history.push('/notebooknotfound')
         }
-    }, [error])
+    }, [hasError, error])
 
     return (
         <Context.Provider value={{
