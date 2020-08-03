@@ -1,12 +1,12 @@
 create table notebooks
 (
-    id binary(16) not null default (uuid_to_bin(uuid())) primary key,
+    id binary(16) not null primary key,
     name varchar(255) not null
 );
 
 create table notes
 (
-    id binary(16) not null default (uuid_to_bin(uuid())) primary key,
+    id binary(16) not null primary key,
     text blob null,
     is_done tinyint(1) not null,
     notebook_id binary(16) not null,
@@ -19,7 +19,7 @@ create table notes
 
 create table task_lists
 (
-    id binary(16) not null default (uuid_to_bin(uuid())) primary key,
+    id binary(16) not null primary key,
     notebook_id binary(16) not null,
     title varchar(255) null,
     is_high_priority tinyint(1) not null,
@@ -30,7 +30,7 @@ create table task_lists
 
 create table tasks
 (
-    id binary(16) not null default (uuid_to_bin(uuid())) primary key,
+    id binary(16) not null primary key,
     task_list_id binary(16) not null,
     text blob null,
     is_done tinyint(1) not null,
