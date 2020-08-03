@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class NotesService {
@@ -23,12 +24,12 @@ public class NotesService {
         this.notebooksRepository = notebooksRepository;
     }
 
-    public List<Note> getNotes(String stringId) {
-        return notesRepository.findAllByNotebook_StringId(stringId);
+    public List<Note> getNotes(UUID uuid) {
+        return notesRepository.findAllByNotebook_Id(uuid);
     }
 
     public Note addNote(Note note) {
-        if (!notebooksRepository.existsByStringId(note.getNotebook().getStringId())){
+        if (!notebooksRepository.existsById(note.getNotebook().getId())){
             throw new NoSuchNotebookException();
         }
 
@@ -36,7 +37,7 @@ public class NotesService {
     }
 
     public Note updateNoteInfo(Note note) {
-        if (!notebooksRepository.existsByStringId(note.getNotebook().getStringId())){
+        if (!notebooksRepository.existsById(note.getNotebook().getId())){
             throw new NoSuchNotebookException();
         }
 
@@ -44,7 +45,7 @@ public class NotesService {
     }
 
     @Transactional
-    public void deleteNote(Long id) {
-        notesRepository.deleteById(id);
+    public void deleteNote(UUID uuid) {
+        notesRepository.deleteById(uuid);
     }
 }

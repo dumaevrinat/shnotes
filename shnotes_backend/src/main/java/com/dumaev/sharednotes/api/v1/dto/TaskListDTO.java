@@ -4,14 +4,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 public class TaskListDTO {
-    private Long id;
+    private UUID id;
     private String title;
     private Set<TaskDTO> tasks;
     private boolean isHighPriority;
 
-    private String notebookId;
+    private UUID notebookId;
 }

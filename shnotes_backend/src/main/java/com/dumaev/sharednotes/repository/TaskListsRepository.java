@@ -5,8 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface TaskListsRepository extends JpaRepository<TaskList, Long> {
-    List<TaskList> findAllByNotebook_StringId(String stringId);
+public interface TaskListsRepository extends JpaRepository<TaskList, UUID> {
+    List<TaskList> findAllByNotebook_Id(UUID uuid);
 }

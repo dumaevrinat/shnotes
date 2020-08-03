@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TasksService {
@@ -22,8 +23,8 @@ public class TasksService {
         this.taskListsRepository = taskListsRepository;
     }
 
-    public List<Task> getTasks(Long taskListsId){
-        return tasksRepository.getAllByTaskList_Id(taskListsId);
+    public List<Task> getTasks(UUID uuid){
+        return tasksRepository.getAllByTaskList_Id(uuid);
     }
 
     public Task addTask(Task task) {
@@ -43,7 +44,7 @@ public class TasksService {
     }
 
     @Transactional
-    public void deleteTask(Long id) {
-        tasksRepository.deleteById(id);
+    public void deleteTask(UUID uuid) {
+        tasksRepository.deleteById(uuid);
     }
 }

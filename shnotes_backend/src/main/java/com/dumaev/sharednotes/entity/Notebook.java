@@ -2,10 +2,13 @@ package com.dumaev.sharednotes.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.id.UUIDGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -13,9 +16,16 @@ import java.util.Set;
 @Table(name = "notebooks")
 public class Notebook implements Serializable {
 
+    @PrePersist
+    public void autofill() {
+        if (id == null){
+            this.setId(UUID.randomUUID());
+        }
+    }
+
     @Id
-    @Column(name = "string_id", unique = true, nullable = false)
-    private String stringId;
+    @Column(name = "id", nullable = false, unique = true)
+    private UUID id;
 
     @Column(name = "name", nullable = false)
     private String name;

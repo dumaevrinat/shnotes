@@ -19,30 +19,23 @@ public class NotebooksService {
         this.notebooksRepository = notebooksRepository;
     }
 
-    public Notebook getNotebook(String stringId) {
-        return notebooksRepository.findById(stringId).orElseThrow(NoSuchNotebookException::new);
+    public Notebook getNotebook(UUID uuid) {
+        return notebooksRepository.findById(uuid).orElseThrow(NoSuchNotebookException::new);
     }
 
-    public String addNotebook(Notebook notebook) {
-        final Notebook notebookToAdd = new Notebook();
+    public UUID addNotebook(Notebook notebook) {
+        notebook.setName(notebook.getName().isEmpty() ? "Untitled" : notebook.getName());
 
-        String stringId = UUID.randomUUID().toString().replace("-", "");
-
-        notebookToAdd.setStringId(stringId);
-        notebookToAdd.setName(notebook.getName().isEmpty() ? "Untitled" : notebook.getName());
-
-        notebooksRepository.save(notebookToAdd);
-
-        return stringId;
+        return notebooksRepository.save(notebook).getId();
     }
 
     @Transactional
-    public void deleteNotebook(String stringId) {
-        notebooksRepository.deleteById(stringId);
+    public void deleteNotebook(UUID uuid) {
+        notebooksRepository.deleteById(uuid);
     }
 
-    public void changeName(String stringId, String name) {
-        Notebook notebook = notebooksRepository.findById(stringId).orElseThrow(NoSuchNotebookException::new);
+    public void changeName(UUID uuid, String name) {
+        Notebook notebook = notebooksRepository.findById(uuid).orElseThrow(NoSuchNotebookException::new);
 
         notebook.setName(name.isEmpty() ? "Untitled" : name);
         notebooksRepository.save(notebook);

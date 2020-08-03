@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -26,7 +27,7 @@ public class Mapper {
 
     public NoteDTO convertToDTO(Note note) {
         NoteDTO noteDTO = modelMapper.map(note, NoteDTO.class);
-        noteDTO.setNotebookId(note.getNotebook().getStringId());
+        noteDTO.setNotebookId(note.getNotebook().getId());
 
         return noteDTO;
     }
@@ -40,7 +41,7 @@ public class Mapper {
 
     public TaskListDTO convertToDTO(TaskList taskList) {
         TaskListDTO taskListDTO = modelMapper.map(taskList, TaskListDTO.class);
-        taskListDTO.setNotebookId(taskList.getNotebook().getStringId());
+        taskListDTO.setNotebookId(taskList.getNotebook().getId());
 
         taskListDTO.setTasks(taskList.getTasks()
                 .stream()
@@ -58,7 +59,7 @@ public class Mapper {
         Note note = modelMapper.map(noteDTO, Note.class);
 
         Notebook notebook = new Notebook();
-        notebook.setStringId(noteDTO.getNotebookId());
+        notebook.setId(noteDTO.getNotebookId());
 
         note.setNotebook(notebook);
 
@@ -80,7 +81,7 @@ public class Mapper {
         TaskList taskList = modelMapper.map(taskListDTO, TaskList.class);
 
         Notebook notebook = new Notebook();
-        notebook.setStringId(taskListDTO.getNotebookId());
+        notebook.setId(taskListDTO.getNotebookId());
 
         taskList.setNotebook(notebook);
 

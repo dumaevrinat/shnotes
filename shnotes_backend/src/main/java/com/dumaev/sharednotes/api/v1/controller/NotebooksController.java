@@ -6,8 +6,11 @@ import com.dumaev.sharednotes.entity.Notebook;
 import com.dumaev.sharednotes.service.NotebooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @CrossOrigin()
@@ -25,25 +28,25 @@ public class NotebooksController {
     }
 
     @GetMapping(value = "/get")
-    public NotebookDTO getNotebook(@RequestParam String notebookId) {
+    public NotebookDTO getNotebook(@RequestParam UUID notebookId) {
         Notebook notebook = notebooksService.getNotebook(notebookId);
 
         return mapper.convertToDTO(notebook);
     }
 
     @PostMapping(value = "/add")
-    public String addNotebook(@Validated @RequestBody NotebookDTO notebookDTO) {
+    public UUID addNotebook(@Validated @RequestBody NotebookDTO notebookDTO) {
         return notebooksService.addNotebook(mapper.convertToEntity(notebookDTO));
     }
 
     @GetMapping(value = "/delete")
-    public ResponseEntity<Object> deleteNotebook(@RequestParam String notebookId) {
+    public ResponseEntity<Object> deleteNotebook(@RequestParam UUID notebookId) {
         notebooksService.deleteNotebook(notebookId);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "/update")
-    public ResponseEntity<Object> updateName(@RequestParam String notebookId, @RequestParam String name) {
+    public ResponseEntity<Object> updateName(@RequestParam UUID notebookId, @RequestParam String name) {
         notebooksService.changeName(notebookId, name);
         return ResponseEntity.ok().build();
     }

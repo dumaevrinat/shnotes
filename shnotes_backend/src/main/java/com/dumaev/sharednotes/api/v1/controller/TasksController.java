@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
@@ -29,7 +30,7 @@ public class TasksController {
     }
 
     @GetMapping(value = "/get")
-    public ResponseEntity<List<TaskDTO>> getTasks(@RequestParam long taskListId) {
+    public ResponseEntity<List<TaskDTO>> getTasks(@RequestParam UUID taskListId) {
         return ResponseEntity.ok(tasksService.getTasks(taskListId)
                 .stream()
                 .map(mapper::convertToDTO)
@@ -37,7 +38,7 @@ public class TasksController {
     }
 
     @GetMapping(value = "/delete")
-    public ResponseEntity<Object> deleteTask(@RequestParam Long taskId) {
+    public ResponseEntity<Object> deleteTask(@RequestParam UUID taskId) {
         tasksService.deleteTask(taskId);
 
         return ResponseEntity.ok().build();

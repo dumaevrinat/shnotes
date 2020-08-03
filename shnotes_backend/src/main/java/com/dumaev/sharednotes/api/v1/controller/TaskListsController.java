@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
@@ -36,7 +37,7 @@ public class TaskListsController {
     }
 
     @GetMapping(value = "/get")
-    public ResponseEntity<List<TaskListDTO>> getTaskLists(@RequestParam String notebookId) {
+    public ResponseEntity<List<TaskListDTO>> getTaskLists(@RequestParam UUID notebookId) {
         return ResponseEntity.ok(taskListsService.getTaskLists(notebookId)
                 .stream()
                 .map(mapper::convertToDTO)
@@ -44,7 +45,7 @@ public class TaskListsController {
     }
 
     @GetMapping(value = "/getFullInfo")
-    public ResponseEntity<List<TaskListDTO>> getTaskListsFullInfo(@RequestParam String notebookId) {
+    public ResponseEntity<List<TaskListDTO>> getTaskListsFullInfo(@RequestParam UUID notebookId) {
         List<TaskListDTO> taskListDTOs = taskListsService.getTaskLists(notebookId)
                 .stream()
                 .map(mapper::convertToDTO)
@@ -63,7 +64,7 @@ public class TaskListsController {
     }
 
     @GetMapping(value = "/delete")
-    public ResponseEntity<Object> deleteTaskList(@RequestParam long taskListId) {
+    public ResponseEntity<Object> deleteTaskList(@RequestParam UUID taskListId) {
         taskListsService.deleteTaskList(taskListId);
 
         return ResponseEntity.ok().build();

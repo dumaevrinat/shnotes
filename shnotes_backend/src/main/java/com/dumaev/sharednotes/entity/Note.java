@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -12,10 +13,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "notes")
 public class Note {
+
+    @PrePersist
+    public void autofill() {
+        if (id == null){
+            this.setId(UUID.randomUUID());
+        }
+    }
+
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id", nullable = false, unique = true)
+    private UUID id;
 
     @Column(name = "title")
     private String title;
@@ -30,6 +38,6 @@ public class Note {
     private boolean isDone;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "notebook_string_id", referencedColumnName = "string_id", nullable = false)
+    @JoinColumn(name = "notebook_id", referencedColumnName = "id", nullable = false)
     private Notebook notebook;
 }
