@@ -8,7 +8,7 @@ import {
 
 const initialState = {
     notebook: {
-        stringId: '',
+        id: '',
         name: ''
     },
     notebookLoading: false
@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
         case GET_NOTEBOOK:
             return {
                 ...state,
-                notebook: action.payload,
+                notebook: {...action.payload},
                 notebookLoading: false
             }
         case CREATE_NOTEBOOK:
@@ -37,7 +37,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 notebook: {
-                    stringId: state.notebook.stringId,
+                    id: state.notebook.id,
                     name: action.payload
                 }
             }

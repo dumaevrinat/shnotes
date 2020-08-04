@@ -27,83 +27,105 @@ export const getTaskers = (notebookId) => (dispatch) => {
         })
 }
 
-export const addTasker = (tasker) => (dispatch) => {
-    API
-        .post("tasklists/add", tasker)
-        .then((result) => dispatch({
-            type: ADD_TASKER,
-            payload: result.data
-        }))
-        .catch(() => {
-            dispatch(createError({type: ADD_TASKER}))
-        })
-}
+export const addTasker = (tasker) => ({
+    type: ADD_TASKER,
+    payload: tasker,
+    meta: {
+        offline: {
+            effect: {
+                url: 'https://dumaev.digital/api/v1/tasklists/add',
+                method: 'POST',
+                data: tasker
+            },
+            commit: {type: 'ADD_TASKER_COMMIT', meta: {tasker}},
+            rollback: {type: 'ADD_TASKER_ROLLBACK', meta: {tasker}}
+        }
+    }
+})
 
-export const updateTasker = (newTasker) => (dispatch) => {
-    API
-        .post("tasklists/update", newTasker)
-        .then((result) => dispatch({
-            type: UPDATE_TASKER,
-            payload: newTasker
-        }))
-        .catch(() => {
-            dispatch(createError({type: UPDATE_TASKER}))
-        })
-}
+export const updateTasker = (newTasker) => ({
+    type: UPDATE_TASKER,
+    payload: newTasker,
+    meta: {
+        offline: {
+            effect: {
+                url: 'https://dumaev.digital/api/v1/tasklists/update',
+                method: 'POST',
+                data: newTasker
+            },
+            commit: {type: 'UPDATE_TASKER_COMMIT', meta: {newTasker}},
+            rollback: {type: 'UPDATE_TASKER_ROLLBACK', meta: {newTasker}}
+        }
+    }
+})
 
-export const removeTasker = (id) => (dispatch) => {
-    API
-        .get("/tasklists/delete", {
-        params: {
-            taskListId: id
-        }})
-        .then(() => dispatch({
-            type: DELETE_TASKER,
-            payload: id
-        }))
-        .catch(() => {
-            dispatch(createError({type: DELETE_TASKER}))
-        })
-}
+export const removeTasker = (id) => ({
+    type: DELETE_TASKER,
+    payload: id,
+    meta: {
+        offline: {
+            effect: {
+                url: 'https://dumaev.digital/api/v1/tasklists/delete',
+                method: 'GET',
+                params: {
+                    taskListId: id
+                }
+            },
+            commit: {type: 'DELETE_TASKER_COMMIT', meta: {id}},
+            rollback: {type: 'DELETE_TASKER_ROLLBACK', meta: {id}}
+        }
+    }
+})
 
-export const addTask = (task) => (dispatch) => {
-    API
-        .post("tasks/add", task)
-        .then((result) => dispatch({
-            type: ADD_TASK,
-            payload: result.data
-        }))
-        .catch(() => {
-            dispatch(createError({type: ADD_TASK}))
-        })
-}
+export const addTask = (task) => ({
+    type: ADD_TASK,
+    payload: task,
+    meta: {
+        offline: {
+            effect: {
+                url: 'https://dumaev.digital/api/v1/tasks/add',
+                method: 'POST',
+                data: task
+            },
+            commit: {type: 'ADD_TASK_COMMIT', meta: {task}},
+            rollback: {type: 'ADD_TASK_ROLLBACK', meta: {task}}
+        }
+    }
+})
 
-export const updateTask = (newTask) => (dispatch) => {
-    API
-        .post("tasks/update", newTask)
-        .then(() => dispatch({
-            type: UPDATE_TASK,
-            payload: newTask
-        }))
-        .catch(() => {
-            dispatch(createError({type: UPDATE_TASK}))
-        })
-}
+export const updateTask = (newTask) => ({
+    type: UPDATE_TASK,
+    payload: newTask,
+    meta: {
+        offline: {
+            effect: {
+                url: 'https://dumaev.digital/api/v1/tasks/update',
+                method: 'POST',
+                data: newTask
+            },
+            commit: {type: 'UPDATE_TASK_COMMIT', meta: {newTask}},
+            rollback: {type: 'UPDATE_TASK_ROLLBACK', meta: {newTask}}
+        }
+    }
+})
 
-export const removeTask = (id) => (dispatch) => {
-    API
-        .get("tasks/delete", {
-        params: {
-            taskId: id
-        }})
-        .then(() => dispatch({
-            type: DELETE_TASK,
-            payload: id
-        }))
-        .catch(() => {
-            dispatch(createError({type: DELETE_TASK}))
-        })
-}
+export const removeTask = (id) => ({
+    type: DELETE_TASK,
+    payload: id,
+    meta: {
+        offline: {
+            effect: {
+                url: 'https://dumaev.digital/api/v1/tasks/delete',
+                method: 'GET',
+                params: {
+                    taskId: id
+                }
+            },
+            commit: {type: 'DELETE_TASK_COMMIT', meta: {id}},
+            rollback: {type: 'DELETE_TASK_ROLLBACK', meta: {id}}
+        }
+    }
+})
 
 const setTaskersLoading = (isLoading) => ({
     type: TASKERS_LOADING,

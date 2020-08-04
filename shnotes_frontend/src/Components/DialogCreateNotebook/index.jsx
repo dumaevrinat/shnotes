@@ -12,6 +12,8 @@ import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
 import API from "../../api/api"
 
+import {v4 as uuidv4} from 'uuid'
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,6 +30,7 @@ export default function CreateNotebookDialog({open}) {
 
     const handleCreateNotebook = () => {
         const notebook = {
+            id: uuidv4(),
             name: notebookName
         }
 

@@ -19,6 +19,8 @@ import {useDispatch} from "react-redux"
 import {addTasker} from "../../actions/taskers"
 import Grow from "@material-ui/core/Grow"
 
+import {v4 as uuidv4} from 'uuid'
+
 const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: theme.spacing(2),
@@ -51,6 +53,7 @@ export default function Builder({notebookStringId}) {
 
     const [noteData, setNoteData] = useState('')
     const [taskerData, setTaskerData] = useState([{
+        id: uuidv4(),
         done: false,
         text: ""
     }])
@@ -60,6 +63,7 @@ export default function Builder({notebookStringId}) {
     const handleAddButton = () => {
         if (isTasker) {
             dispatch(addTasker({
+                id: uuidv4(),
                 notebookId: notebookStringId,
                 title: title,
                 tasks: taskerData,
@@ -73,6 +77,7 @@ export default function Builder({notebookStringId}) {
             }])
         } else {
             dispatch(addNote({
+                id: uuidv4(),
                 done: false,
                 notebookId: notebookStringId,
                 text: noteData,

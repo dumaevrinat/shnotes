@@ -23,12 +23,12 @@ export default function UpdateNotebookDialog({open}) {
 
     const {setIsOpenUpdateNotebookDialog}= useContext(Context)
     const notebookName = useSelector(state => state.notebook.notebook.name)
-    const stringId = useSelector(state => state.notebook.notebook.stringId)
+    const id = useSelector(state => state.notebook.notebook.id)
 
     const [notebookNameTextField, setNotebookNameTextField] = useState(notebookName)
 
     const handleUpdateNotebook = () => {
-        dispatch(updateNotebookName(stringId, notebookNameTextField))
+        dispatch(updateNotebookName(id, notebookNameTextField))
         setIsOpenUpdateNotebookDialog(false)
     }
 

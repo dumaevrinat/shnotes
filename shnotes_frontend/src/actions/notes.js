@@ -26,45 +26,53 @@ export const getNotes = (notebookId) => (dispatch) => {
         })
 }
 
-export const addNote = (note) => (dispatch) => {
-    API
-        .post("notes/add", note)
-        .then((result) => dispatch({
-            type: ADD_NOTE,
-            payload: result.data
-        }))
-        .catch((error) => {
-            dispatch(createError({type: ADD_NOTE}))
-        })
-}
+export const addNote = (note) => ({
+    type: ADD_NOTE,
+    payload: note,
+    meta: {
+        offline: {
+            effect: {
+                url: 'https://dumaev.digital/api/v1/notes/add',
+                method: 'POST',
+                data: note
+            },
+            commit: {type: 'ADD_NOTE_COMMIT', meta: {note}},
+            rollback: {type: 'ADD_NOTE_ROLLBACK', meta: {note}}
+        }
+    }
+})
 
-export const removeNote = (id) => (dispatch) => {
-    API
-        .get("notes/delete", {
-            params: {
-                noteId: id
-            }
-        })
-        .then(() => dispatch({
-            type: DELETE_NOTE,
-            payload: id
-        }))
-        .catch((error) => {
-            dispatch(createError({type: DELETE_NOTE}))
-        })
-}
+export const removeNote = (id) => ({
+    type: DELETE_NOTE,
+    payload: id,
+    meta: {
+        offline: {
+            effect: {
+                url: 'https://dumaev.digital/api/v1/notes/delete',
+                method: 'GET',
+                params: {noteId: id}
+            },
+            commit: {type: 'DELETE_NOTE_COMMIT', meta: {id}},
+            rollback: {type: 'DELETE_NOTE_ROLLBACK', meta: {id}}
+        }
+    }
+})
 
-export const updateNote = (newNote) => (dispatch) => {
-    API
-        .post("notes/update", newNote)
-        .then(() => dispatch({
-            type: UPDATE_NOTE,
-            payload: newNote
-        }))
-        .catch((error) => {
-            dispatch(createError({type: UPDATE_NOTE}))
-        })
-}
+export const updateNote = (newNote) => ({
+    type: UPDATE_NOTE,
+    payload: newNote,
+    meta: {
+        offline: {
+            effect: {
+                url: 'https://dumaev.digital/api/v1/notes/update',
+                method: 'POST',
+                data: newNote
+            },
+            commit: {type: 'UPDATE_NOTE_COMMIT', meta: {newNote}},
+            rollback: {type: 'UPDATE_NOTE_ROLLBACK', meta: {newNote}}
+        }
+    }
+})
 
 const setNotesLoading = (isLoading) => ({
     type: NOTES_LOADING,
