@@ -3,6 +3,8 @@ name: Deploy shnotes to GitHub Pages
 
 on:
   push:
+    paths: 
+      - 'shnotes_frontend'
     branches: [ master ]
 
 jobs:
