@@ -21,7 +21,7 @@ export default function DeleteNotebookDialog({open}) {
     const history = useHistory()
 
     const {setIsOpenDeleteNotebookDialog}= useContext(Context)
-    const stringId = useSelector(state => state.notebook.notebook.stringId)
+    const stringId = useSelector(state => state.notebook.notebook.id)
 
     const handleDeleteNotebook = () => {
         API
