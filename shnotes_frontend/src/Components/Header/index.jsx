@@ -67,7 +67,7 @@ export default function Header({title, notebookUrl}) {
                             size='small'
                             startIcon={<Share/>}
                             disableElevation
-                            onClick={() => copy('dumaevrinat.github.io/#' + notebookUrl)}
+                            onClick={() => copy('dumaevrinat.github.io/shnotes/#' + notebookUrl)}
                         >
                             Скопировать ссылку
                         </Button>

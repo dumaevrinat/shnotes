@@ -55,6 +55,7 @@ export default function TaskerBuilder({tasker}) {
     const addNewTask = () => {
         const newTaskListsData = tasker.slice()
         newTaskListsData.push({
+            id: uuidv4(),
             done: false,
             text: ""
         })
