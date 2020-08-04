@@ -3,6 +3,8 @@ name: Deploy backend
 
 on:
   push:
+    paths: 
+      - 'shnotes_backend/*'
     branches: [ master ]
 
 jobs:
