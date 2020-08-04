@@ -3,6 +3,8 @@ name: Deploy database
 
 on:
   push:
+    paths: 
+      - 'database/*'
     branches: [ master ]
 
 jobs:
