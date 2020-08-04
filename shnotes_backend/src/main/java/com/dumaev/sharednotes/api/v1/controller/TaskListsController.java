@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -51,7 +52,7 @@ public class TaskListsController {
                 .map(mapper::convertToDTO)
                 .collect(Collectors.toList());
 
-        for(TaskListDTO taskListDTO: taskListDTOs) {
+        for (TaskListDTO taskListDTO : taskListDTOs) {
             Set<TaskDTO> tasks = tasksService.getTasks(taskListDTO.getId())
                     .stream()
                     .map(mapper::convertToDTO)
@@ -79,9 +80,13 @@ public class TaskListsController {
 
     @PostMapping(value = "/add")
     public ResponseEntity<Object> addTaskList(@Validated @RequestBody TaskListDTO taskListDTO) {
-        TaskList taskList = taskListsService.addTaskList(mapper.convertToEntity(taskListDTO));
+        TaskList taskListToAdd = mapper.convertToEntity(taskListDTO);
 
-            Set<Task> tasks = taskListDTO.getTasks()
+        taskListToAdd.setTasks(Collections.emptySet());
+
+        TaskList taskList = taskListsService.addTaskList(taskListToAdd);
+
+        Set<Task> tasks = taskListDTO.getTasks()
                 .stream()
                 .map((taskDTO -> {
                     Task task = mapper.convertToEntity(taskDTO);

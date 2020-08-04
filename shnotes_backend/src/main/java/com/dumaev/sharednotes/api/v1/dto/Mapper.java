@@ -85,6 +85,12 @@ public class Mapper {
 
         taskList.setNotebook(notebook);
 
+        taskList.setTasks(taskListDTO.getTasks()
+                .stream()
+                .map(this::convertToEntity)
+                .collect(Collectors.toSet())
+        );
+
         return taskList;
     }
 }
