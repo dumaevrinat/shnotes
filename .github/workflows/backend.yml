@@ -4,7 +4,7 @@ name: Deploy backend
 on:
   push:
     paths: 
-      - 'shnotes_backend/*'
+      - 'shnotes_backend/**'
     branches: [ master ]
 
 jobs:
