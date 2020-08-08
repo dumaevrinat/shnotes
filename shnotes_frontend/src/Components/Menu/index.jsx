@@ -89,22 +89,6 @@ export default function Menu({isOpenMenu, notebookUrl}) {
                         <ListItemText primary="Скопировать ссылку"/>
                     </ListItem>
                 </Hidden>
-                <ListItem button onClick={() => setIsOpenTags(!isOpenTags)}>
-                    <ListItemIcon className={classes.itemIconTag}><LocalOfferOutlined/></ListItemIcon>
-                    <ListItemText primary="Ярлыки"/>
-                    {isOpenTags ? <ExpandLess/> : <ExpandMore/>}
-                </ListItem>
-                <Collapse in={isOpenTags}>
-                    <List disablePadding>
-                        <ListItem className={classes.nested}>
-                            <Chip
-                                icon={<FilterListOutlined/>}
-                                clickable
-                                label='Test tag'
-                            />
-                        </ListItem>
-                    </List>
-                </Collapse>
                 <ListItem button onClick={() => setIsOpenUpdateNotebookDialog(true)}>
                     <ListItemIcon className={classes.itemIconChange}><EditOutlined/></ListItemIcon>
                     <ListItemText primary="Изменить блокнот"/>
