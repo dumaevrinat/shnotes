@@ -9,12 +9,12 @@ import NotebookNotFoundPage from "../Pages/NotebookNotFoundPage"
 const theme = createMuiTheme({
     palette: {
         primary: {
-            light: '#9778ce',
-            main: '#7e57c2',
+            light: '#7c4dff',
+            main: '#7c4dff',
         },
         secondary: {
-            light: '#ff8a80',
-            main: '#ff8a80',
+            light: '#ff4081',
+            main: '#ff4081',
         },
     },
 })

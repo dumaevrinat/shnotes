@@ -129,7 +129,7 @@ export default function Builder({notebookStringId}) {
                         </Tooltip>
                     </div>
                     <Button
-                        variant='outlined'
+                        variant='contained'
                         color={highPriority ? "secondary" : "primary"}
                         startIcon={<Add/>}
                         disableElevation

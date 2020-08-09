@@ -62,7 +62,7 @@ export default function Header({title, notebookUrl}) {
                             <EditOutlined/>
                         </IconButton>
                         <Button
-                            variant='contained'
+                            variant='outlined'
                             color='primary'
                             size='small'
                             startIcon={<Share/>}

@@ -8,18 +8,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import {
     BookOutlined, DeleteOutline, EditOutlined,
-    ExpandLess,
-    ExpandMore, FilterListOutlined,
-    LocalOfferOutlined, ShareOutlined
+    ShareOutlined
 } from "@material-ui/icons"
 import Context from "../../context"
-import Typography from "@material-ui/core/Typography"
-import Collapse from "@material-ui/core/Collapse"
-import Chip from "@material-ui/core/Chip"
 import {NavLink} from "react-router-dom"
 import ListSubheader from "@material-ui/core/ListSubheader"
 import {Hidden} from "@material-ui/core"
 import copy from "copy-to-clipboard"
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
     root: {},
@@ -59,9 +55,8 @@ export default function Menu({isOpenMenu, notebookUrl}) {
     const {
         setIsOpenCreateNotebookDialog,
         setIsOpenDeleteNotebookDialog,
-        setIsOpenUpdateNotebookDialog} = useContext(Context)
-
-    const [isOpenTags, setIsOpenTags] = useState(false)
+        setIsOpenUpdateNotebookDialog
+    } = useContext(Context)
 
     return (
         <Drawer className={classes.root} transitionDuration={150} open={isOpenMenu} onClose={() => toggleMenu()}>
@@ -93,7 +88,7 @@ export default function Menu({isOpenMenu, notebookUrl}) {
                     <ListItemIcon className={classes.itemIconChange}><EditOutlined/></ListItemIcon>
                     <ListItemText primary="Изменить блокнот"/>
                 </ListItem>
-                <ListItem button onClick={() => setIsOpenDeleteNotebookDialog(true) }>
+                <ListItem button onClick={() => setIsOpenDeleteNotebookDialog(true)}>
                     <ListItemIcon className={classes.itemIconDelete}><DeleteOutline/></ListItemIcon>
                     <ListItemText primary="Удалить блокнот"/>
                 </ListItem>

@@ -52,6 +52,7 @@ export default function HomePage() {
                         <div>
                             <Typography variant="h4" className={classes.title}>
                                 Создавайте блокноты с заметками и задачами.
+                                <br/>
                                 Делитесь ими, просто отправив ссылку
                             </Typography>
                             <Button
