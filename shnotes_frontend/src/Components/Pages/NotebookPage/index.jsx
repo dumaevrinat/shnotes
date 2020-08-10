@@ -27,6 +27,9 @@ import DeleteNotebookDialog from "../../DialogDeleteNotebook"
 import {getErrorMessageByType} from "../../../utils/getErrorMessage"
 import {GET_NOTEBOOK} from "../../../actions/types"
 import {useHistory} from "react-router-dom"
+import Badge from "@material-ui/core/Badge";
+import {ErrorOutline} from "@material-ui/icons";
+import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,16 +43,17 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(0.5),
     },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
+    counter: {
+        marginRight: theme.spacing(1),
     },
-    expandOpen: {
-        transform: 'rotate(180deg)',
+    empty: {
+        display: 'flex',
+        padding: theme.spacing(2)
+    },
+    emptyIcon: {
+        marginRight: theme.spacing(1)
     }
 }))
 
@@ -122,44 +126,55 @@ export default function NotebookPage(props) {
                 <Builder notebookStringId={props.match.params.stringId}/>
 
                 <div className={classes.title}>
-                    <Typography variant='overline'>
-                        Списки задач
-                    </Typography>
-
-                    <IconButton
-                        className={clsx(classes.expand, expandedTaskLists && classes.expandOpen)}
-                        onClick={() => setExpandedTaskLists(!expandedTaskLists)}
-                        size='small'
+                    <Badge
+                        color='primary'
+                        badgeContent={taskers.length}
+                        invisible={expandedTaskLists}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right'
+                        }}
                     >
-                        <ExpandMoreIcon/>
-                    </IconButton>
+                        <Typography variant='subtitle2' onClick={() => setExpandedTaskLists(!expandedTaskLists)}>
+                            СПИСКИ ЗАДАЧ
+                        </Typography>
+                    </Badge>
                 </div>
 
                 <Collapse in={expandedTaskLists} timeout="auto">
                     {isLoadingTaskers && <CircularProgress className={classes.progressBar}/>}
-                    <div className={classes.taskers}>
-                        {!isLoadingTaskers && taskers.map((tasker) => <Tasker data={tasker} key={tasker.id}/>)}
-                    </div>
+                    {!isLoadingTaskers && taskers.map((tasker) => <Tasker data={tasker} key={tasker.id}/>)}
+                    {!isLoadingTaskers && taskers.length === 0 &&
+                    <div className={classes.empty}>
+                        <ErrorOutline className={classes.emptyIcon} color='action'/>
+                        <Typography> Нет списков задач</Typography>
+                    </div>}
                 </Collapse>
 
                 <div className={classes.title}>
-                    <Typography variant='overline' className={classes.title}>
-                        Заметки
-                    </Typography>
-
-                    <IconButton
-                        className={clsx(classes.expand, expandedNotes && classes.expandOpen)}
-                        onClick={() => setExpandedNotes(!expandedNotes)}
-                        size='small'
+                    <Badge
+                        color='primary'
+                        badgeContent={notes.length}
+                        invisible={expandedNotes}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right'
+                        }}
                     >
-                        <ExpandMoreIcon/>
-                    </IconButton>
+                        <Typography variant='subtitle2' onClick={() => setExpandedNotes(!expandedNotes)}>
+                            ЗАМЕТКИ
+                        </Typography>
+                    </Badge>
                 </div>
 
                 <Collapse in={expandedNotes} timeout="auto">
                     {isLoadingNotes && <CircularProgress className={classes.progressBar}/>}
                     {!isLoadingNotes && notes.map((note) => <Note data={note} key={note.id}/>)}
-
+                    {!isLoadingNotes && notes.length === 0 &&
+                    <div className={classes.empty}>
+                        <ErrorOutline className={classes.emptyIcon} color='action'/>
+                        <Typography> Нет заметок</Typography>
+                    </div>}
                 </Collapse>
 
                 <Snackbar
