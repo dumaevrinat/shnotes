@@ -9,13 +9,13 @@ import CreateNotebookDialog from "../../DialogCreateNotebook"
 import Context from "../../../context"
 
 import Lottie from 'react-lottie'
-import animationData from '../../../lotties/multitasking.json'
+import animationData from '../../../lotties/astronaut.json'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: "space-between",
+        alignItems: "center",
     },
     title: {
         marginTop: theme.spacing(4),
@@ -24,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
     mainButton: {},
     animation: {
         marginTop: theme.spacing(8),
+        maxWidth: 500,
+        maxHeight: 500,
     }
 }))
 
@@ -42,10 +44,9 @@ export default function HomePage() {
     }
 
     return (
-        <div className={classes.root}>
-            <Container maxWidth="md">
-                <Context.Provider value={{setIsOpenCreateNotebookDialog}}>
-
+        <Container maxWidth="md">
+            <Context.Provider value={{setIsOpenCreateNotebookDialog}}>
+                <div className={classes.root}>
                     <CreateNotebookDialog open={isOpenCreateNotebookDialog}/>
 
                     <Grow in={true}>
@@ -71,8 +72,8 @@ export default function HomePage() {
                     <div className={classes.animation}>
                         <Lottie options={defaultOptions}/>
                     </div>
-                </Context.Provider>
-            </Container>
-        </div>
+                </div>
+            </Context.Provider>
+        </Container>
     )
 }
