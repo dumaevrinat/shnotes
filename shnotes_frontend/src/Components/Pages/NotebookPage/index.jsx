@@ -7,9 +7,6 @@ import {makeStyles} from "@material-ui/core/styles"
 import Context from "../../../context"
 import Tasker from "../../Tasker"
 import Typography from "@material-ui/core/Typography"
-import IconButton from "@material-ui/core/IconButton"
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import clsx from "clsx"
 import Collapse from "@material-ui/core/Collapse"
 import Builder from "../../Builder"
 
