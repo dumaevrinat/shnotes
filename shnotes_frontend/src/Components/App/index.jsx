@@ -20,7 +20,6 @@ const theme = createMuiTheme({
 })
 
 export default function App() {
-
     return (
         <ThemeProvider theme={responsiveFontSizes(theme)}>
                 <div className="App">
