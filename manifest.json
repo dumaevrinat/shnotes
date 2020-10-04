@@ -1,15 +1,31 @@
 {
-  "short_name": "Low quality users detection",
-  "name": "Low quality users detection",
+  "short_name": "Shared notes",
+  "name": "Shared notes",
+  "description": "A simple application to create and share notes and tasks.",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "images/logo_16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "images/logo_128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "images/logo_144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "images/logo_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#7c4dff",
   "background_color": "#ffffff"
 }
