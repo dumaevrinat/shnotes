@@ -1,6 +1,6 @@
 <div align="center">
 <a href="//dumaevrinat.github.io/shnotes">
-  <img src="https://user-images.githubusercontent.com/44341469/98824982-0464f280-2445-11eb-9b22-1ae196331b4c.png" height="80" />
+  <img src="https://user-images.githubusercontent.com/44341469/98824982-0464f280-2445-11eb-9b22-1ae196331b4c.png" width="340" />
 </a>
 
 ***shared notes** is a simple tool to create and share notes and tasks.*
